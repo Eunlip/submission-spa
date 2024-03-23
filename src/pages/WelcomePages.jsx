@@ -7,7 +7,7 @@ export default function WelcomePages() {
 			<div className='flex flex-col items-center justify-center gap-10 my-32'>
 				<img src={illustration} alt='illustration' />
 				<div className='flex flex-col items-center justify-center gap-5'>
-					<h1 className='text-3xl font-bold capitalize'>keep your notes</h1>
+					<h2 className='text-3xl font-bold capitalize'>keep your notes</h2>
 					<p className='text-sm text-center text-secondary'>
 						Take notes, reminders, set targets, <br/> collect resources, and secure privacy
 					</p>
