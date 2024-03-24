@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const showFormattedDate = (date) => {
   const options = {
     weekday: 'long',
@@ -8,4 +10,11 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString('id-ID', options);
 };
 
-export { showFormattedDate };
+const noteItemPropTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+};
+
+export { showFormattedDate, noteItemPropTypes };

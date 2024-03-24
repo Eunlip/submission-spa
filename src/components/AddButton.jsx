@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom';
 import { FaCirclePlus } from 'react-icons/fa6';
 import PropTypes from 'prop-types';
 
-export default function AddButton({ path }) {
+export default function AddButton({ path, title }) {
 	return (
-		<Link to={path} className='text-3xl bg-black'>
+		<Link to={path} title={title} className='fixed text-6xl right-8 bottom-10'>
 			<FaCirclePlus />
 		</Link>
 	);
 }
 
 AddButton.propTypes = {
-	path: PropTypes.string,
+	path: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
 };

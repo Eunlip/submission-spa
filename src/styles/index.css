@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    background-color: #1D232A;
-  }
+@layer components {
+	.placeholder:after {
+		content: 'Input your note here...';
+		color: grey;
+	}
 }
+

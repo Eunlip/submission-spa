@@ -6,7 +6,8 @@ export default function DeleteButton({ id, onDelete }) {
 		<button
 			id={id}
 			onClick={() => onDelete(id)}
-			className='p-1 text-xl text-white bg-black rounded-full '
+			title='Delete'
+			className='fixed p-1 text-5xl text-white bg-black rounded-full bottom-16 right-10 sm:bottom-20 sm:right-16 lg:right-28'
 		>
 			<BsTrash2 />
 		</button>
