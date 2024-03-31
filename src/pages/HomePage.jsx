@@ -8,8 +8,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 function HomePageWrapper() {
 	const [searchParams, setSearchParams] = useSearchParams();
-
 	const keyword = searchParams.get('keyword');
+
 	function changeSearchParams(keyword) {
 		setSearchParams({ keyword });
 	}

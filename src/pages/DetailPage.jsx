@@ -26,13 +26,19 @@ class DetailPage extends Component {
 	}
 
 	onDeleteHandeler() {
+		const alertDelete = confirm('are you sure you want to delete this note?');
+		if (!alertDelete) return;
+
 		deleteNote(this.props.id);
-		const pathPatameter = this.state.note.archived ? '/notes/archive' : '/notes';
-		this.props.navigate(pathPatameter);
+		const pathParameter = this.state.note.archived ? '/notes/archive' : '/notes';
+		this.props.navigate(pathParameter);
 	}
 
 	onArchiveHandler() {
 		if (this.state.note && !this.state.note.archived) {
+			const alertArchive = confirm('are you sure want to archive this note?');
+			if (!alertArchive) return;
+
 			archiveNote(this.props.id);
 			this.props.navigate('/notes');
 		}
@@ -40,6 +46,9 @@ class DetailPage extends Component {
 
 	onUnarchiveHandler() {
 		if (this.state.note && this.state.note.archived) {
+			const alertUnarchive = confirm('are you sure you want to unarchive this note?');
+			if (!alertUnarchive) return;
+			
 			unarchiveNote(this.props.id);
 			this.props.navigate('/notes/archive');
 		}
@@ -49,7 +58,7 @@ class DetailPage extends Component {
 		const note = this.state.note;
 
 		return (
-			<div className='py-5'>
+			<div className='h-screen py-5'>
 				{this.state.note ? (
 					<NoteDetail
 						id={note.id}

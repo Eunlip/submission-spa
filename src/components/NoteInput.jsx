@@ -62,7 +62,7 @@ class NoteInput extends Component {
 					></div>
 				</div>
 				<button type='submit' title='save' onClick={this.onSaveHandler}>
-					<FaCheckCircle className='fixed text-6xl bottom-10 right-8' />
+					<FaCheckCircle className='fixed text-6xl right-8 2xl:right-28 bottom-10 2xl:bottom-20' />
 				</button>
 			</div>
 		);

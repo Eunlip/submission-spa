@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function AddButton({ path, title }) {
 	return (
-		<Link to={path} title={title} className='fixed text-6xl right-8 bottom-10'>
+		<Link to={path} title={title} className='fixed text-6xl right-8 2xl:right-28 bottom-10 2xl:bottom-20'>
 			<FaCirclePlus />
 		</Link>
 	);
@@ -12,5 +12,5 @@ export default function AddButton({ path, title }) {
 
 AddButton.propTypes = {
 	path: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
+	title: PropTypes.string,
 };

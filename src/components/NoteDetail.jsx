@@ -11,7 +11,7 @@ export default function NoteDetail({ note, id, onDelete, onArchive }) {
 	const { title, createdAt, body, archived } = note;
 
 	return (
-		<div className='relative'>
+		<div className=''>
 			<Link to='/notes' className='absolute top-3'>
 				<IoArrowBackCircleSharp className='text-5xl text-x2' />
 			</Link>
