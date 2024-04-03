@@ -1,4 +1,4 @@
-import Illustration404 from '../assets/404-illustration2.svg';
+import Illustration404 from '../assets/images/404-illustration2.svg';
 
 export default function Page404() {
 	return (

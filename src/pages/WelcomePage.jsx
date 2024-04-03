@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import illustration from '../assets/illustration-2.svg';
+import illustration from '../assets/images/illustration-2.svg';
 
 export default function WelcomePage() {
 	return (
