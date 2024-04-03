@@ -13,10 +13,12 @@ export default {
 			'dark-green': '#00935F',
 			'light-green': '#00AC6F',
 			'transparent': 'transparent',
+			'input': '#E9F0FD',
 		},
 		fontFamily: {
 			display: '"Libre Caslon Text", serif',
 		},
 		extend: {},
 	},
+	darkMode: 'selector',
 };

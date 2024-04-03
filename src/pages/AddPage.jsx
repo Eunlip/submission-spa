@@ -1,18 +1,19 @@
-import { addNote } from "../utils/local-data"
-import { useNavigate } from "react-router-dom"
-import NoteInput from "../components/NoteInput";
+import { addNote } from '../utils/network-data';
+import { useNavigate } from 'react-router-dom';
+import NoteInput from '../components/input/NoteInput';
 
 export default function AddPage() {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const onAddNoteHandler = (note) => {
-    addNote(note);
-    navigate('/notes');
-  }
+	const onAddNoteHandler = (note) => {
+		
+		addNote(note);
+		navigate('/');
+	};
 
-  return (
-    <div className="h-screen pt-5">
-      <NoteInput addNote={onAddNoteHandler} />
-    </div>
-  )
+	return (
+		<div className='h-screen pt-5'>
+			<NoteInput addNote={onAddNoteHandler} />
+		</div>
+	);
 }

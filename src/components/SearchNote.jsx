@@ -5,13 +5,13 @@ export default function SearchNote({ keyword, keywordChange }) {
 	return (
 		<div className='relative flex items-center'>
 			<input
-				className='relative w-full h-10 p-6 border rounded-lg focus:outline-2 focus:border-transparent'
+				className='relative w-full h-10 p-6 border rounded-lg dark:bg-[#dedede] dark:text-black dark:outline-none focus:outline-2 focus:border-transparent'
 				type='text'
 				placeholder='Search by title...'
 				value={keyword}
 				onChange={(event) => keywordChange(event.target.value)}
 			/>
-			<FiSearch className='absolute text-2xl right-5' />
+			<FiSearch className='absolute text-2xl right-5 dark:text-black' />
 		</div>
 	);
 }

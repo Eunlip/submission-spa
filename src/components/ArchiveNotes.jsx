@@ -1,81 +1,71 @@
-import { Component } from 'react';
-import { archiveNote, filterNotes, getArchivedNotes } from '../utils/local-data';
+import { useContext, useEffect, useState } from 'react';
+import { filterNotes } from '../utils/local-data';
+import { getArchivedNotes, archiveNote } from '../utils/network-data';
 import { Link, useSearchParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import NoteList from './NoteList';
-import AddButton from './AddButton';
+import AddButton from './button/AddButton';
 import SearchNote from './SearchNote';
+import LocaleContext from '../contexts/LocaleContext';
+import { localeTitleChange } from '../utils';
 
-function ArchiveNotesWrapper() {
+export default function ArchiveNotes() {
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [isLoading, setIsLoading] = useState(true);
+	const [notes, setNotes] = useState([]);
+	const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
+	const { locale } = useContext(LocaleContext);
 
-	const keyword = searchParams.get('keyword');
-	function changeSearchParams(keyword) {
+	function onKeywordChangeHandler(keyword) {
+		setKeyword(keyword);
 		setSearchParams({ keyword });
 	}
 
-	return <ArchiveNotes defaultKeyword={keyword} keywordChange={changeSearchParams} />;
-}
+	useEffect(() => {
+		getArchivedNotes()
+			.then(({ data }) => {
+				setNotes(data);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	});
 
-class ArchiveNotes extends Component {
-	constructor(props) {
-		super(props);
+	const archiveNotes = filterNotes(notes, keyword);
 
-		this.state = {
-			notes: getArchivedNotes(),
-			keyword: props.defaultKeyword || '',
-		};
-
-		this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
-	}
-
-	onKeywordChangeHandler(keyword) {
-		this.setState(() => {
-			return {
-				keyword,
-			};
-		});
-
-		this.props.keywordChange(keyword);
-	}
-
-	render() {
-		const archiveNotes = filterNotes(this.state.notes, this.state.keyword);
-		console.log(archiveNotes)
-		return (
-			<div className='pt-10 text-center '>
-				<h1 className='text-xl font-bold'>HeNotes</h1>
-				<div className='flex items-center justify-between mb-3 mt-7 sm:mt-5'>
-					<Link to='/notes' className={`px-6 py-1 font-bold rounded-md cursor-pointer`}>
-						Active
-					</Link>
-					<h2
-						className={`px-6 py-1 font-bold rounded-md cursor-pointer ${
-							archiveNote ? 'bg-dark-green text-white ' : 'bg-white text-black'
-						}`}
-					>
-						Archive
-					</h2>
-				</div>
-				<SearchNote keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
-				<div className={`flex flex-col items-center justify-center `}>
-					{archiveNotes.length ? (
+	return (
+		<div className='mt-10 '>
+			<div className='flex items-center justify-between mb-3 mt-7 sm:mt-5'>
+				<Link to='/' className={`px-6 py-1 font-bold rounded-md cursor-pointer`}>
+					{localeTitleChange(locale, 'Catatan Aktif', 'Active Notes')}
+				</Link>
+				<h2
+					className={`px-6 py-1 font-bold rounded-md cursor-pointer ${
+						archiveNote
+							? 'bg-dark-green dark:bg-[#2c343e] dark:shadow-black dark:shadow-sm text-white'
+							: 'bg-white text-black'
+					}`}
+				>
+					{localeTitleChange(locale, 'Catatan Arsip', 'Archive Notes')}
+				</h2>
+			</div>
+			<SearchNote keyword={keyword} keywordChange={onKeywordChangeHandler} />
+			<div className={`flex flex-col items-center justify-center `}>
+				{isLoading && <p className='justify-center font-bold text-center mt-60'>Loading...</p>}
+				{!isLoading &&
+					(archiveNotes.length ? (
 						<NoteList notes={archiveNotes} />
 					) : (
 						<p className='justify-center font-bold text-center mt-60'>
-							You don&apos;t have any active records.
+							{localeTitleChange(
+								locale,
+								'Anda tidak memiliki catatan Arsip.',
+								"You don't have any active records.",
+							)}
 						</p>
-					)}
-				</div>
-				<AddButton path='/notes/new' />
+					))}
 			</div>
-		);
-	}
+			<AddButton path='/notes/new' />
+		</div>
+	);
 }
-
-ArchiveNotes.propTypes = {
-	defaultKeyword: PropTypes.string,
-	keywordChange: PropTypes.func.isRequired,
-};
-
-export default ArchiveNotesWrapper;

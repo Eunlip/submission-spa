@@ -3,9 +3,43 @@
 @tailwind utilities;
 
 @layer components {
-	.placeholder:after {
-		content: 'Input your note here...';
+	.id-placeholder:after {
+		content: 'Isi Catatan';
 		color: grey;
+	}
+	.en-placeholder:after {
+		content: 'Note Content';
+		color: grey;
+	}
+	input::placeholder {
+		color:grey
 	}
 }
 
+@layer base {
+	[data-theme='light'] {
+		background-color: #efefef;
+		color: #333333;
+		transition: all 0.2s ease-out;
+	}
+
+	.dark {
+		background-color: #1d232a;
+		color: #fdfeff;
+	}
+
+	.dark-dropdown::before,
+	.dropdown::before {
+		content: '';
+		position: absolute;
+		top: -5px; /* Adjust this value to move the arrow up or down */
+		right: 0; /* Adjust this value to move the arrow left or right */
+		border-left: 15px solid transparent;
+		border-bottom: 10px solid #00ac6f ; /* This color should match the background color of the dropdown */
+		z-index: 0;
+	}
+
+	.dark-dropdown::before {
+		border-bottom: 10px solid  #2c343e;
+	}
+}

@@ -1,82 +1,89 @@
-import { Component } from 'react';
-import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/local-data';
+import { useContext, useEffect, useState } from 'react';
+import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/network-data';
+import { useNavigate, useParams } from 'react-router-dom';
 import NoteDetail from '../components/NoteDetail';
 import Page404 from './404Page';
-import { useNavigate, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import LocaleContext from '../contexts/LocaleContext';
+import { localeTitleChange } from '../utils';
 
-function DetailPageWrapper() {
+export default function DetailPage() {
+	const [isLoading, setIsLoading] = useState(true);
+	const [note, setNote] = useState('');
+	const { id } = useParams();
+	const { locale } = useContext(LocaleContext);
 	const navigate = useNavigate();
 
-	const { id } = useParams();
-	return <DetailPage id={id} navigate={navigate} />;
-}
+	useEffect(() => {
+		getNote(id)
+			.then(({ data }) => {
+				setNote(data);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, [id]);
 
-class DetailPage extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			note: getNote(props.id),
-		};
-
-		this.onDeleteHandeler = this.onDeleteHandeler.bind(this);
-		this.onArchiveHandler = this.onArchiveHandler.bind(this);
-		this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
-	}
-
-	onDeleteHandeler() {
-		const alertDelete = confirm('are you sure you want to delete this note?');
+	async function onDeleteHandler() {
+		const Delete = localeTitleChange(
+			locale,
+			'Apakah anda yakin ingin menghapus catatan ini?',
+			'Are you sure you want to delete this note?',
+		);
+		const alertDelete = confirm(Delete);
 		if (!alertDelete) return;
 
-		deleteNote(this.props.id);
-		const pathParameter = this.state.note.archived ? '/notes/archive' : '/notes';
-		this.props.navigate(pathParameter);
+		await deleteNote(note.id);
+		const pathParameter = note.archived ? '/notes/archive' : '/';
+		navigate(pathParameter);
 	}
 
-	onArchiveHandler() {
-		if (this.state.note && !this.state.note.archived) {
-			const alertArchive = confirm('are you sure want to archive this note?');
+	async function onArchiveHandler() {
+		if (note && !note.archived) {
+			const Archive = localeTitleChange(
+				locale,
+				'Apakah anda yakin ingin mengarsipkan catatan ini?',
+				'Are you sure you want to archive this note?',
+			);
+			const alertArchive = confirm(Archive);
 			if (!alertArchive) return;
 
-			archiveNote(this.props.id);
-			this.props.navigate('/notes');
+			archiveNote(note.id);
+			navigate('/');
 		}
 	}
 
-	onUnarchiveHandler() {
-		if (this.state.note && this.state.note.archived) {
-			const alertUnarchive = confirm('are you sure you want to unarchive this note?');
+	async function onUnarchiveHandler() {
+		if (note && note.archived) {
+			const Unarchive = localeTitleChange(
+				locale,
+				'Apakah anda yakin ingin membuka arsip catatan ini?',
+				'Are you sure you want to unarchive this note?',
+			);
+			const alertUnarchive = confirm(Unarchive);
 			if (!alertUnarchive) return;
-			
-			unarchiveNote(this.props.id);
-			this.props.navigate('/notes/archive');
+
+			unarchiveNote(note.id);
+			navigate('/notes/archive');
 		}
 	}
 
-	render() {
-		const note = this.state.note;
+	if (isLoading) return <p className='font-bold text-center mt-60'>Loading...</p>;
 
-		return (
-			<div className='h-screen py-5'>
-				{this.state.note ? (
+	return (
+		<div>
+			<div className='h-full py-5'>
+				{note && !isLoading ? (
 					<NoteDetail
 						id={note.id}
-						onDelete={this.onDeleteHandeler}
-						onArchive={!note.archived ? this.onArchiveHandler : this.onUnarchiveHandler}
+						onDelete={onDeleteHandler}
+						onArchive={!note.archived ? onArchiveHandler : onUnarchiveHandler}
 						note={note}
 					/>
 				) : (
 					<Page404 />
 				)}
 			</div>
-		);
-	}
+		</div>
+	);
 }
-
-DetailPage.propTypes = {
-	id: PropTypes.string.isRequired,
-	navigate: PropTypes.func.isRequired,
-};
-
-export default DetailPageWrapper;
