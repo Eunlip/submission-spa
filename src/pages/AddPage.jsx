@@ -12,7 +12,7 @@ export default function AddPage() {
 	};
 
 	return (
-		<div className='h-screen pt-5'>
+		<div className='h-full pt-5'>
 			<NoteInput addNote={onAddNoteHandler} />
 		</div>
 	);
