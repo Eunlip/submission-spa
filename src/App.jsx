@@ -21,7 +21,7 @@ function App() {
 	const [authUser, setAuthUser] = useState(null);
 	const [initializing, setInitializing] = useState(true);
 	const [locale, setLocale] = useState(localStorage.getItem('locale') || 'id');
-	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 	const navigate = useNavigate();
 
 	const toggleLocale = () => {
