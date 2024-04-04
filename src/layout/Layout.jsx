@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function Layout({ onLogout, name, authUser }) {
 	return (
-		<div className='container h-auto px-5 sm:px-10 lg:px-52 font-display'>
+		<div className='container items-center h-auto px-5 sm:px-10 lg:px-28 font-display'>
 			<Header logout={onLogout} name={name} authUser={authUser} />
 			<Outlet />
 			<ScrollRestoration />

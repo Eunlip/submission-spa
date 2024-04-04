@@ -15,6 +15,7 @@ import {
 	RegisterPage,
 	WelcomePage,
 } from './pages';
+import LandingPage from './pages/LandingPage';
 
 function App() {
 	const [authUser, setAuthUser] = useState(null);
@@ -66,7 +67,7 @@ function App() {
 	const onLogout = () => {
 		setAuthUser(null);
 		putAccessToken(null);
-		navigate('/');
+		navigate('/login');
 	};
 
 	// useEffect(() => {
@@ -106,7 +107,8 @@ function App() {
 				<Routes>
 					{!authUser ? (
 						<Route path='/' element={<Layout authUser={authUser} />}>
-							<Route index element={<WelcomePage />} />
+							<Route index element={<LandingPage />} />
+							<Route path='/welcomePage' element={<WelcomePage />} />
 							<Route path='/login' element={<LoginPage loginSuccess={onLoginSuccess} />} />
 							<Route path='/register' element={<RegisterPage />} />
 						</Route>
