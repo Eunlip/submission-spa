@@ -18,9 +18,11 @@ export default function LoginPage({ loginSuccess }) {
 	}
 
 	return (
-		<div className='container flex items-center justify-center mt-40'>
+		<div className='container flex items-center justify-center py-20 sm:py-40'>
 			<div className='flex flex-col gap-5 p-10'>
-				<h1 className='text-2xl font-bold'>{localeTitleChange(locale, 'Silahkan Masuk', 'Please Login')}</h1>
+				<h1 className='text-2xl font-bold'>
+					{localeTitleChange(locale, 'Silahkan Masuk', 'Please Login')}
+				</h1>
 				<LoginInput login={onLogin} />
 				<span>
 					{localeTitleChange(locale, 'Belum punya akun?', "Don't have an account yet?")}

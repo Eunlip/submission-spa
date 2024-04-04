@@ -11,7 +11,6 @@ import {
 	HomePage,
 	LoginPage,
 	Page404,
-	// Page404,
 	RegisterPage,
 	WelcomePage,
 } from './pages';

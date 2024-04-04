@@ -12,7 +12,7 @@
 		color: grey;
 	}
 	input::placeholder {
-		color:grey
+		color: grey;
 	}
 }
 
@@ -32,30 +32,30 @@
 	.dropdown::before {
 		content: '';
 		position: absolute;
-		top: -5px; /* Adjust this value to move the arrow up or down */
-		right: 0; /* Adjust this value to move the arrow left or right */
+		top: -5px;
+		right: 0;
 		border-left: 15px solid transparent;
-		border-bottom: 10px solid #00ac6f ; /* This color should match the background color of the dropdown */
+		border-bottom: 10px solid #00ac6f;
 		z-index: 0;
 	}
 
 	.dark-dropdown::before {
-		border-bottom: 10px solid  #2c343e;
+		border-bottom: 10px solid #2c343e;
 	}
 
 	.my-node-enter {
 		opacity: 0;
 	}
-	
+
 	.my-node-enter-active {
 		opacity: 1;
 		transition: opacity 500ms;
 	}
-	
+
 	.my-node-exit {
 		opacity: 1;
 	}
-	
+
 	.my-node-exit-active {
 		opacity: 0;
 		transition: opacity 500ms;

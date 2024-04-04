@@ -20,10 +20,9 @@ export default function Header({ name, logout, authUser }) {
 	};
 
 	return (
-		<header className='relative flex items-center justify-between pt-10'>
+		<header className='relative flex items-center justify-between mt-10 '>
 			{authUser ? (
 				<nav className='flex items-center justify-between w-screen'>
-					{''}
 					<h1 className='text-xl font-bold'>Henotes</h1>
 					<div className='flex items-center gap-5'>
 						<ToggleTheme />
