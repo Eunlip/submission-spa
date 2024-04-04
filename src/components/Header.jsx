@@ -20,7 +20,7 @@ export default function Header({ name, logout, authUser }) {
 	};
 
 	return (
-		<header className='relative flex items-center justify-between mt-10 '>
+		<header className='relative flex items-center justify-between mt-10'>
 			{authUser ? (
 				<nav className='flex items-center justify-between w-screen'>
 					<h1 className='text-xl font-bold'>Henotes</h1>
@@ -44,7 +44,7 @@ export default function Header({ name, logout, authUser }) {
 						</div>
 					</div>
 					{isMenuOpen && (
-						<div className='dark:shadow-md dark:shadow-[#1D232A] absolute right-3 z-50 p-3 text-white rounded-md bg-light-green dark:bg-[#2c343e] top-20 dropdown dark:dark-dropdown'>
+						<div className='dark:shadow-md dark:shadow-[#1D232A] absolute right-3 z-50 p-3 text-white rounded-md bg-light-green dark:bg-[#2c343e] top-10 dropdown dark:dark-dropdown'>
 							<ul className='flex flex-col items-center gap-3 '>
 								<li className='flex items-center gap-2'>
 									<span>
