@@ -62,7 +62,7 @@ export default function LandingPage() {
 					src={heroImage}
 					alt='hero'
 				/>
-				<div className='absolute top-0 right-0 z-0'>
+				<div className='absolute top-0 right-0 z-0 '>
 					<img src={rectangle} alt='rectangle' />
 				</div>
 			</div>
