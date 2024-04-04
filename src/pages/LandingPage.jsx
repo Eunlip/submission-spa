@@ -50,9 +50,9 @@ export default function LandingPage() {
 						<div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
 							<div className='flex items-center justify-center h-screen space-x-2 '>
 								<span className='sr-only'>Loading...</span>
-								<div className='h-3 w-3 bg-black dark:bg-white rounded-full animate-bounce [animation-delay:-0.3s]'></div>
-								<div className='h-3 w-3 bg-black dark:bg-white rounded-full animate-bounce [animation-delay:-0.15s]'></div>
-								<div className='w-3 h-3 bg-black rounded-full dark:bg-white animate-bounce'></div>
+								<div className='h-3 w-3 bg-white rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+								<div className='h-3 w-3 bg-white rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+								<div className='w-3 h-3 bg-white rounded-full animate-bounce'></div>
 							</div>
 						</div>
 					)}
